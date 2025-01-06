@@ -1,48 +1,53 @@
 package clients.cashier;
 
-
 /**
- * The Cashier Controller
+ * Controller for the Cashier Client.
+ * It handles user input and communicates with the model.
  */
+public class CashierController {
+    private CashierModel model = null;
+    private CashierView view = null;
 
-public class CashierController
-{
-  private CashierModel model = null;
-  private CashierView  view  = null;
+    /**
+     * Constructor to initialize the controller.
+     * @param model The model for managing data and logic.
+     * @param view The view for the user interface.
+     */
+    public CashierController(CashierModel model, CashierView view) {
+        this.view = view;
+        this.model = model;
+    }
 
-  /**
-   * Constructor
-   * @param model The model 
-   * @param view  The view from which the interaction came
-   */
-  public CashierController( CashierModel model, CashierView view )
-  {
-    this.view  = view;
-    this.model = model;
-  }
+    /**
+     * Handles the "Check" action.
+     * Plays a welcome sound when the button is clicked.
+     * @param pn The product number to check.
+     */
+    public void doCheck(String pn) {
+        model.doCheck(pn);
+        SoundPlayer.playSound("resources/welcome.wav"); // Path to "welcome" sound file
+    }
 
-  /**
-   * Check interaction from view
-   * @param pn The product number to be checked
-   */
-  public void doCheck( String pn )
-  {
-    model.doCheck(pn);
-  }
+    /**
+     * Handles the "Buy" action.
+     */
+    public void doBuy() {
+        model.doBuy();
+    }
 
-   /**
-   * Buy interaction from view
-   */
-  public void doBuy()
-  {
-    model.doBuy();
-  }
-  
-   /**
-   * Bought interaction from view
-   */
-  public void doBought()
-  {
-    model.doBought();
-  }
+    /**
+     * Handles the "Bought/Pay" action.
+     * Plays a thank-you sound when the button is clicked.
+     */
+    public void doBought() {
+        model.doBought();
+        SoundPlayer.playSound("resources/thank_you.wav"); // Path to "thank you" sound file
+    }
+
+    /**
+     * Handles the "Clear" action.
+     */
+    public void doClear() {
+        model.doClear();
+    }
 }
